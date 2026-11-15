@@ -1,0 +1,36 @@
+# arb_guard runs offline on local files, so CI needs no keys or mock mode.
+name: ci
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 3 * * 1"   # every Monday: catch SDK or dependency drift
+  workflow_dispatch:
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+      - run: dart pub get
+      - run: dart analyze --fatal-infos
+      - run: dart test
+      - name: Clean example passes
+        run: dart run bin/arb_guard.dart check --arb-dir example/clean --lang en
+      - name: Defective example fails with exit code 1
+        run: |
+          set +e
+          dart run bin/arb_guard.dart check --arb-dir example/l10n --lang en
+          code=$?
+          test "$code" -eq 1
+      - name: Compiled binary matches
+        run: |
+          dart compile exe bin/arb_guard.dart -o arb_guard
+          ./arb_guard --version
