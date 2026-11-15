@@ -108,7 +108,7 @@ dart run bin/arb_guard.dart check --arb-dir example/clean --lang ko
 | `--no-color` | 색 없는 출력 | |
 | `--lang en\|ko` | 출력 언어 | `--lang ko` |
 | `rules` | 모든 규칙과 기본 심각도 목록 | `arb_guard rules` |
-| `--version` | 버전 출력 | `arb_guard 0.1.0` |
+| `--version` | 버전 출력 | `arb_guard 0.1.1` |
 
 종료 코드: `0` `--fail-on` 이상의 발견 없음, `1` 발견 있음, `2` 사용법 오류(예: 폴더 없음).
 
@@ -134,7 +134,7 @@ dart run bin/arb_guard.dart check --arb-dir example/clean --lang ko
 | AG011 | error | ICU 메시지 문법 오류 |
 | AG012 | error | 자리표시자 메타데이터(type, format)가 템플릿과 다름 |
 | AG013 | info | 번역이 템플릿 문장과 똑같음 |
-| AG014 | error | ARB 파일이 올바르지 않음(UTF-8 아님, JSON, 값 형식, 알 수 없는 키) |
+| AG014 | error | ARB 파일이 올바르지 않음(JSON, 값 형식, 알 수 없는 키. 읽을 수 없거나 UTF-8 이 아닌 파일 포함) |
 
 템플릿에서 빠진 자리표시자 N개와 번역에서 새로 생긴 N개가 같으면, 문서 순서대로 짝지어 `AG001`/`AG002` 두 종류 대신 "이름이 바뀜" `AG003` 한 줄로 보고합니다. 개수가 다르면 `AG001`/`AG002` 로 돌아갑니다.
 

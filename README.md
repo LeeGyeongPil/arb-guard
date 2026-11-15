@@ -108,7 +108,7 @@ In your own project, `arb_guard check` with no options reads `l10n.yaml` (if pre
 | `--no-color` | Plain text output | |
 | `--lang en\|ko` | Language of the output | `--lang ko` |
 | `rules` | Lists all rules and their default severity | `arb_guard rules` |
-| `--version` | Prints the version | `arb_guard 0.1.0` |
+| `--version` | Prints the version | `arb_guard 0.1.1` |
 
 Exit codes: `0` nothing at or above `--fail-on`, `1` findings, `2` usage error (for example a missing folder).
 
@@ -134,7 +134,7 @@ Exit codes: `0` nothing at or above `--fail-on`, `1` findings, `2` usage error (
 | AG011 | error | ICU message syntax error |
 | AG012 | error | Placeholder metadata (type, format) differs from the template |
 | AG013 | info | The translation is identical to the template text |
-| AG014 | error | The ARB file is invalid (not UTF-8, JSON, value type, unknown key) |
+| AG014 | error | The ARB file is invalid (JSON, value type, unknown key; also unreadable or non-UTF-8 files) |
 
 If the template has N placeholders missing and the translation has N unknown ones, arb-guard pairs them in document order and reports one `AG003` "renamed" line instead of separate `AG001`/`AG002` lines. If the counts differ it falls back to `AG001`/`AG002`.
 
