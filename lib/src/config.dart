@@ -68,13 +68,17 @@ const String defaultArbDir = 'lib/l10n';
 const String defaultTemplateFile = 'app_en.arb';
 
 String _dirname(String path) {
-  final cut = path.lastIndexOf('/');
+  final cut = path.lastIndexOf(RegExp(r'[\\/]'));
   if (cut < 0) return '.';
   return cut == 0 ? '/' : path.substring(0, cut);
 }
 
 String _resolveAgainst(String base, String path) {
-  if (path.startsWith('/') || base == '.') return path;
+  final absolute =
+      path.startsWith('/') ||
+      path.startsWith('\\') ||
+      RegExp(r'^[A-Za-z]:[\\/]').hasMatch(path);
+  if (absolute || base == '.') return path;
   return '$base/$path';
 }
 

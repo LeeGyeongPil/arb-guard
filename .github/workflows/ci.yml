@@ -32,5 +32,5 @@ jobs:
           test "$code" -eq 1
       - name: Compiled binary matches
         run: |
-          dart compile exe bin/arb_guard.dart -o arb_guard
-          ./arb_guard --version
+          dart compile exe bin/arb_guard.dart -o arb_guard_bin.exe
+          ./arb_guard_bin.exe --version

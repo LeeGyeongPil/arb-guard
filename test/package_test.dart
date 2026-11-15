@@ -17,12 +17,12 @@ void main() {
   test('the only runtime dependency is args', () {
     final block =
         RegExp(
-          r'^dependencies:\n((?:  .*\n)+)',
+          r'^dependencies:\r?\n((?:  .*\r?\n)+)',
           multiLine: true,
         ).firstMatch(pubspec)!.group(1)!;
     final names =
         block
-            .split('\n')
+            .split(RegExp(r'\r?\n'))
             .where((l) => l.trim().isNotEmpty)
             .map((l) => l.trim().split(':').first)
             .toList();
@@ -30,7 +30,7 @@ void main() {
   });
 
   test('the executable is declared', () {
-    expect(pubspec, contains('executables:\n  arb_guard:'));
+    expect(pubspec, matches(RegExp(r'executables:\r?\n  arb_guard:')));
     expect(File('bin/arb_guard.dart').existsSync(), isTrue);
   });
 
