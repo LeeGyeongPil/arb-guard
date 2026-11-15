@@ -1,0 +1,10 @@
+{
+  "@@locale": "pl",
+  "greeting": "Cześć, {name}!",
+  "invite": "{gender, select, male{Zaprosił cię} female{Zaprosiła cię} other{Zaprosili cię}",
+  "fileCount": "{count, plural, =0{Brak plików} one{1 plik} other{{count} plików}}",
+  "bold": "Witaj <b>{name}</b>",
+  "save": "Zapisz",
+  "cartItems": "{count, plural, one{{count} produkt w {store}} few{{count} produkty} many{{count} produktów w {store}} other{{count} produktu w {store}}}",
+  "age": "{years, plural, one{1 rok} few{{years} lata} many{{years} lat} other{{years} roku}}"
+}

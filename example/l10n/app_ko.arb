@@ -1,0 +1,10 @@
+{
+  "@@locale": "ko",
+  "greeting": "안녕하세요, {name}님! {user}",
+  "invite": "{gender, select, male{그가 초대했습니다} female{그녀가 초대했습니다} other{초대했습니다}}",
+  "fileCount": "{count, plural, =0{파일 없음} other{파일 {count}개}}",
+  "bold": "환영합니다 <b>{name}</b>",
+  "save": "Save",
+  "cartItems": "{count, plural, other{{store}에 {count}개 상품}}",
+  "age": "{years, plural, other{{years}살}}"
+}

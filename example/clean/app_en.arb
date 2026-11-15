@@ -1,0 +1,16 @@
+{
+  "@@locale": "en",
+  "greeting": "Hello, {name}!",
+  "@greeting": {"placeholders": {"name": {"type": "String"}}},
+  "invite": "{gender, select, male{He invited you} female{She invited you} other{They invited you}}",
+  "@invite": {"placeholders": {"gender": {"type": "String"}}},
+  "fileCount": "{count, plural, =0{No files} one{1 file} other{{count} files}}",
+  "@fileCount": {"placeholders": {"count": {"type": "int"}}},
+  "bold": "Welcome <b>{name}</b>",
+  "@bold": {"placeholders": {"name": {"type": "String"}}},
+  "save": "Save",
+  "cartItems": "{count, plural, one{{count} item in {store}} other{{count} items in {store}}}",
+  "@cartItems": {"placeholders": {"count": {"type": "int"}, "store": {"type": "String"}}},
+  "age": "{years, plural, one{1 year} other{{years} years}}",
+  "@age": {"placeholders": {"years": {"type": "int"}}}
+}

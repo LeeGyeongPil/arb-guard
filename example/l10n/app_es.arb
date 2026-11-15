@@ -1,0 +1,11 @@
+{
+  "@@locale": "es",
+  "greeting": "¡Hola, {nombre}!",
+  "@greeting": {"placeholders": {"name": {"type": "int"}}},
+  "invite": "{gender, select, masculino{Él te invitó} femenino{Ella te invitó} other{Te invitaron}}",
+  "fileCount": "{count, plural, =0{Sin archivos} one{1 archivo} other{{count} archivos}}",
+  "bold": "Bienvenido <b>{name}",
+  "save": "Guardar",
+  "cartItems": "{n, plural, one{{n} artículo en {store}} other{{n} artículos en {store}}}",
+  "age": "{years, plural, one{1 año} other{# años}}"
+}
