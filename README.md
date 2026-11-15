@@ -108,7 +108,7 @@ In your own project, `arb_guard check` with no options reads `l10n.yaml` (if pre
 | `--no-color` | Plain text output | |
 | `--lang en\|ko` | Language of the output | `--lang ko` |
 | `rules` | Lists all rules and their default severity | `arb_guard rules` |
-| `--version` | Prints the version | `arb_guard 0.1.1` |
+| `--version` | Prints the version | `arb_guard 0.1.2` |
 
 Exit codes: `0` nothing at or above `--fail-on`, `1` findings, `2` usage error (for example a missing folder).
 

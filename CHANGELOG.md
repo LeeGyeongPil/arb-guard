@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2]
+
 ### Fixed
 - AG007 no longer flags a dropped plural count variable inside a select nested in a plural branch, and its message now shows the full branch path (e.g. `count=one/gender=male`).
 
@@ -36,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `arb_guard rules` command and the library API `checkProject` / `checkMessages`.
 - `example/l10n` (defective translations) and `example/clean` (no findings).
 
-[Unreleased]: https://github.com/LeeGyeongPil/arb-guard/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/LeeGyeongPil/arb-guard/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/LeeGyeongPil/arb-guard/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/LeeGyeongPil/arb-guard/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/LeeGyeongPil/arb-guard/releases/tag/v0.1.0
