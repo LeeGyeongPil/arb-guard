@@ -135,7 +135,7 @@ void checkBranchPlaceholders(MessageContext c) {
       if (!reported.add('${ctx.path}|$name')) continue;
       c.add(
         'AG007',
-        c.t('ag007', [ctx.branchKey!, braces(name)]),
+        c.t('ag007', [ctx.path, braces(name)]),
         data: {'branch': ctx.branchKey, 'placeholder': name, 'path': ctx.path},
       );
     }

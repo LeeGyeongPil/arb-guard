@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- AG007 no longer flags a dropped plural count variable inside a select nested in a plural branch, and its message now shows the full branch path (e.g. `count=one/gender=male`).
+
 ## [0.1.1]
 
 ### Fixed

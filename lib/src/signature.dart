@@ -116,7 +116,7 @@ class ContextPair {
   /// Key of the translation branch (null at top level).
   final String? branchKey;
 
-  /// Variable of the plural this part is a direct branch of, if any.
+  /// Variable of the nearest enclosing plural (through select), if any.
   final String? enclosingPlural;
 
   /// True when this part is inside any plural branch.
@@ -208,7 +208,7 @@ StructurePairs pairStructure(
           rb.key,
           ra.kind == ArgKind.plural || ra.kind == ArgKind.ordinal
               ? ra.name
-              : null,
+              : enclosingPlural,
           inPlural || ra.kind == ArgKind.plural || ra.kind == ArgKind.ordinal,
         );
       }

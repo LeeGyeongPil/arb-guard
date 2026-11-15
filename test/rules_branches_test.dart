@@ -127,6 +127,26 @@ void main() {
       expect(ids(f), ['AG007']);
     });
 
+    test('dropping the plural count inside a nested select is idiomatic', () {
+      expect(
+        check(
+          '{count, plural, one{{g, select, male{{count} he} other{{count} they}}} other{{count} x}}',
+          '{count, plural, one{{g, select, male{Él} other{Elle}}} other{{count} x}}',
+        ),
+        isEmpty,
+      );
+    });
+
+    test('nested select drop of another placeholder shows the path', () {
+      final f = check(
+        '{count, plural, one{{g, select, male{{name} he} other{{name} they}}} other{{count} x}}',
+        '{count, plural, one{{g, select, male{Él} other{{name} elle}}} other{{count} x}}',
+      );
+      expect(ids(f), ['AG007']);
+      expect(f.single.data['path'], 'count=one/g=male');
+      expect(f.single.message, contains('count=one/g=male'));
+    });
+
     test('a placeholder missing everywhere is not repeated per branch', () {
       final f = check(
         '{g, select, male{{name} came} other{{name} came}}',
