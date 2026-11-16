@@ -267,10 +267,10 @@ dart analyze --fatal-infos
 dart test
 ```
 
-To check the lowest dependency versions allowed by `pubspec.yaml` (CI does this in the `lowest-versions` job):
+To check the lowest allowed version of the runtime dependency `args` (CI does this in the `lowest-versions` job):
 
 ```bash
-dart pub downgrade
+dart pub downgrade args
 dart analyze --fatal-infos
 dart test
 ```

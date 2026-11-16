@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.3]
 
 ### Changed
-- The `args` dependency is now `^2.7.0` instead of pinned `2.7.0`, so projects that depend on arb_guard can resolve other `args` versions. CI also runs analyze and tests against the lowest allowed versions.
+- The `args` dependency is now `^2.7.0` instead of pinned `2.7.0`, so projects that depend on arb_guard can resolve other `args` versions. CI also runs analyze and tests against the lowest allowed version of `args`, the runtime dependency.
 
 ## [0.1.2]
 

@@ -267,10 +267,10 @@ dart analyze --fatal-infos
 dart test
 ```
 
-`pubspec.yaml` 이 허용하는 가장 낮은 의존성 버전으로 확인하려면(CI 의 `lowest-versions` 작업이 같은 일을 합니다):
+런타임 의존성 `args` 의 허용 하한 버전으로 확인하려면(CI 의 `lowest-versions` 작업이 같은 일을 합니다):
 
 ```bash
-dart pub downgrade
+dart pub downgrade args
 dart analyze --fatal-infos
 dart test
 ```
