@@ -4,6 +4,14 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0]
+
+### Added
+- `AG014` now reports a key that appears more than once in the same ARB file (template or translation), with `data.reason` `duplicate_key`. The finding points at the repeated key and gives the first position (`data.first_line`, `data.first_column`). JSON keeps only the last value, so the earlier text was lost without a warning.
+
+### Changed
+- A file with a repeated key used to pass and now fails with an `AG014` error. Remove the extra entry to fix it.
+
 ## [0.1.4]
 
 ### Changed
@@ -46,7 +54,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `arb_guard rules` command and the library API `checkProject` / `checkMessages`.
 - `example/l10n` (defective translations) and `example/clean` (no findings).
 
-[Unreleased]: https://github.com/LeeGyeongPil/arb-guard/compare/v0.1.4...HEAD
+[Unreleased]: https://github.com/LeeGyeongPil/arb-guard/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/LeeGyeongPil/arb-guard/compare/v0.1.4...v0.2.0
 [0.1.4]: https://github.com/LeeGyeongPil/arb-guard/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/LeeGyeongPil/arb-guard/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/LeeGyeongPil/arb-guard/compare/v0.1.1...v0.1.2

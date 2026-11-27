@@ -17,6 +17,6 @@ body:
     id: env
     attributes:
       label: 환경 / Environment
-      placeholder: "macOS 15 · Ubuntu 24.04 · Windows 11 / Dart 3.8.1 / arb_guard 0.1.4"
+      placeholder: "macOS 15 · Ubuntu 24.04 · Windows 11 / Dart 3.8.1 / arb_guard 0.2.0"
     validations:
       required: true
