@@ -14,14 +14,14 @@ void main() {
     expect(packageVersion, version);
   });
 
-  test('version is 0.1.3', () {
-    expect(packageVersion, '0.1.3');
+  test('version is 0.1.4', () {
+    expect(packageVersion, '0.1.4');
     final r = Process.runSync('dart', [
       'run',
       'bin/arb_guard.dart',
       '--version',
     ]);
-    expect((r.stdout as String).trim(), 'arb_guard 0.1.3');
+    expect((r.stdout as String).trim(), 'arb_guard 0.1.4');
   });
 
   test('the only runtime dependency is args', () {

@@ -108,7 +108,7 @@ dart run bin/arb_guard.dart check --arb-dir example/clean --lang ko
 | `--no-color` | 색 없는 출력 | |
 | `--lang en\|ko` | 출력 언어 | `--lang ko` |
 | `rules` | 모든 규칙과 기본 심각도 목록 | `arb_guard rules` |
-| `--version` | 버전 출력 | `arb_guard 0.1.3` |
+| `--version` | 버전 출력 | `arb_guard 0.1.4` |
 
 종료 코드: `0` `--fail-on` 이상의 발견 없음, `1` 발견 있음, `2` 사용법 오류(예: 폴더 없음).
 

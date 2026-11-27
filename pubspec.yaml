@@ -1,6 +1,6 @@
 name: arb_guard
 description: Checks that translated Flutter ARB files keep the template's placeholders, select keys, plural branches and markup tags. Built for LLM and machine translation pipelines.
-version: 0.1.3
+version: 0.1.4
 repository: https://github.com/LeeGyeongPil/arb-guard
 issue_tracker: https://github.com/LeeGyeongPil/arb-guard/issues
 topics:
