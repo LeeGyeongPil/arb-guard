@@ -13,6 +13,21 @@ class Position {
   String toString() => '$line:$column';
 }
 
+/// A top-level key written more than once in the same file.
+///
+/// JSON parsers keep only the last value, so the earlier ones are lost.
+class DuplicateKey {
+  const DuplicateKey(this.key, this.first, this.position);
+
+  final String key;
+
+  /// Where the key first appears.
+  final Position first;
+
+  /// Where it appears again (one entry per repeat).
+  final Position position;
+}
+
 /// A parsed `.arb` file.
 class ArbFile {
   ArbFile._({
@@ -20,6 +35,7 @@ class ArbFile {
     required this.locale,
     required this.entries,
     required this.positions,
+    this.duplicates = const [],
     this.parseError,
     this.parseErrorKey,
     this.errorPosition,
@@ -36,6 +52,9 @@ class ArbFile {
 
   /// Position of the opening quote of each top-level key.
   final Map<String, Position> positions;
+
+  /// Top-level keys that appear more than once, in file order.
+  final List<DuplicateKey> duplicates;
 
   /// Set when the file is not valid JSON (then [entries] is empty).
   final String? parseError;
@@ -79,11 +98,13 @@ class ArbFile {
       );
     }
     final locale = decoded['@@locale'];
+    final duplicates = <DuplicateKey>[];
     return ArbFile._(
       path: path,
       locale: locale is String && locale.isNotEmpty ? locale : fallbackLocale,
       entries: decoded,
-      positions: _scanKeyPositions(source, index),
+      positions: _scanKeyPositions(source, index, duplicates),
+      duplicates: duplicates,
     );
   }
 
@@ -123,8 +144,16 @@ class _LineIndex {
 }
 
 /// Finds the position of every key of the top-level object.
-Map<String, Position> _scanKeyPositions(String source, _LineIndex index) {
+///
+/// A repeated key keeps its last position (the value JSON decoding keeps);
+/// each repeat is added to [duplicates].
+Map<String, Position> _scanKeyPositions(
+  String source,
+  _LineIndex index,
+  List<DuplicateKey> duplicates,
+) {
   final result = <String, Position>{};
+  final first = <String, Position>{};
   var depth = 0;
   var expectKey = false;
   var i = 0;
@@ -140,7 +169,16 @@ Map<String, Position> _scanKeyPositions(String source, _LineIndex index) {
       if (depth == 1 && expectKey && i < source.length) {
         final raw = source.substring(start, i + 1);
         final key = jsonDecode(raw);
-        if (key is String) result[key] = index.positionOf(start);
+        if (key is String) {
+          final at = index.positionOf(start);
+          final seen = first[key];
+          if (seen == null) {
+            first[key] = at;
+          } else {
+            duplicates.add(DuplicateKey(key, seen, at));
+          }
+          result[key] = at;
+        }
         expectKey = false;
       }
       i++;

@@ -227,6 +227,28 @@ String _joinPath(String dir, String name) {
   return clean == '.' ? name : '$clean/$name';
 }
 
+/// AG014 for every repeated top-level key, at the repeat's position.
+List<Finding> _duplicateKeyFindings(String lang, ArbFile arb, String path) => [
+  for (final d in arb.duplicates)
+    Finding(
+      ruleId: 'AG014',
+      severity: Severity.error,
+      locale: arb.locale,
+      key: d.key,
+      message: tr(lang, 'ag014.duplicate', [
+        '${d.first.line}:${d.first.column}',
+      ]),
+      file: path,
+      line: d.position.line,
+      column: d.position.column,
+      data: {
+        'reason': 'duplicate_key',
+        'first_line': d.first.line,
+        'first_column': d.first.column,
+      },
+    ),
+];
+
 String _parseErrorText(String lang, ArbFile arb) =>
     arb.parseErrorKey != null ? tr(lang, arb.parseErrorKey!) : arb.parseError!;
 
@@ -318,6 +340,8 @@ Future<CheckResult> checkProject(CheckOptions options) async {
     }
   }
 
+  findings.addAll(_duplicateKeyFindings(lang, template, templatePath));
+
   final names =
       dir
           .listSync()
@@ -373,6 +397,7 @@ Future<CheckResult> checkProject(CheckOptions options) async {
         ),
       );
     } else {
+      part.addAll(_duplicateKeyFindings(lang, arb, path));
       part.addAll(
         _checkTranslation(
           lang: lang,

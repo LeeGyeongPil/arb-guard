@@ -65,7 +65,8 @@ const Map<String, String> _en = {
   'rule.AG012.desc':
       'Placeholder metadata (type, format) differs from the template',
   'rule.AG013.desc': 'The translation is identical to the template text',
-  'rule.AG014.desc': 'The ARB file is invalid (JSON, value type, unknown key)',
+  'rule.AG014.desc':
+      'The ARB file is invalid (JSON, value type, unknown or duplicate key)',
 
   // Finding messages.
   'ag001': 'placeholder {0} from the template is missing in the translation',
@@ -103,6 +104,8 @@ const Map<String, String> _en = {
       'the template file {0} is not valid UTF-8 - re-save it as UTF-8',
   'ag014.type': 'message value must be a string, found {0}',
   'ag014.extra': 'key does not exist in the template file',
+  'ag014.duplicate':
+      'key appears more than once (first at {0}); only the last value is used',
   'icu.unterminatedBrace': "an opening '{' is never closed",
   'icu.unexpectedClosingBrace': "unexpected '}' without a matching '{'",
   'icu.expectedIdentifier': 'expected an argument name after {',
@@ -180,7 +183,7 @@ const Map<String, String> _ko = {
   'rule.AG011.desc': 'ICU 메시지 문법 오류',
   'rule.AG012.desc': '자리표시자 메타데이터(type, format)가 템플릿과 다릅니다',
   'rule.AG013.desc': '번역이 템플릿 문장과 글자 그대로 같습니다',
-  'rule.AG014.desc': 'ARB 파일이 올바르지 않습니다(JSON, 값 형식, 모르는 키)',
+  'rule.AG014.desc': 'ARB 파일이 올바르지 않습니다(JSON, 값 형식, 모르는 키, 중복 키)',
 
   'ag001': '템플릿의 자리표시자 {0} 이(가) 번역에 없습니다',
   'ag002':
@@ -211,6 +214,7 @@ const Map<String, String> _ko = {
       '템플릿 파일 {0} 이(가) 올바른 UTF-8 이 아닙니다 - UTF-8 로 다시 저장하세요',
   'ag014.type': '메시지 값은 문자열이어야 합니다 (현재 {0})',
   'ag014.extra': '템플릿 파일에 없는 키입니다',
+  'ag014.duplicate': '같은 키가 두 번 이상 나옵니다(처음 위치 {0}) - 마지막 값만 쓰입니다',
   'icu.unterminatedBrace': "여는 '{' 가 닫히지 않았습니다",
   'icu.unexpectedClosingBrace': "짝이 없는 '}' 가 있습니다",
   'icu.expectedIdentifier': '{ 뒤에 인자 이름이 필요합니다',
