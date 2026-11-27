@@ -182,6 +182,72 @@ void main() {
       expect(File(f.file!).existsSync(), isTrue);
     });
 
+    test('duplicate key in a translation is AG014 duplicate_key', () async {
+      final dir = tempProject({
+        'app_en.arb': '{"a": "A"}',
+        'app_es.arb': '{\n  "a": "Á",\n  "a": "B"\n}',
+      });
+      addTearDown(() => dir.deleteSync(recursive: true));
+      for (final lang in ['en', 'ko']) {
+        final result = await checkProject(
+          CheckOptions(arbDir: dir.path, lang: lang),
+        );
+        final f = result.findings.single;
+        expect(f.ruleId, 'AG014');
+        expect(f.key, 'a');
+        expect(f.file, endsWith('app_es.arb'));
+        expect(f.line, 3);
+        expect(f.column, 3);
+        expect(f.data['reason'], 'duplicate_key');
+        expect(f.data['first_line'], 2);
+        expect(f.data['first_column'], 3);
+        expect(f.message, contains('2:3'));
+      }
+    });
+
+    test('each repeat of a key is reported, metadata keys included', () async {
+      final dir = tempProject({
+        'app_en.arb': '{"a": "A"}',
+        'app_es.arb': '{"a": "1", "@a": {}, "a": "2", "@a": {}, "a": "3"}',
+      });
+      addTearDown(() => dir.deleteSync(recursive: true));
+      final result = await checkProject(CheckOptions(arbDir: dir.path));
+      final dups = [
+        for (final f in result.findings)
+          if (f.data['reason'] == 'duplicate_key') f.key,
+      ];
+      expect(dups, ['a', '@a', 'a']);
+    });
+
+    test('duplicate key in the template is reported', () async {
+      final dir = tempProject({
+        'app_en.arb': '{\n  "a": "A",\n  "a": "B"\n}',
+        'app_es.arb': '{"a": "Á"}',
+      });
+      addTearDown(() => dir.deleteSync(recursive: true));
+      final result = await checkProject(CheckOptions(arbDir: dir.path));
+      final f = result.findings.single;
+      expect(f.ruleId, 'AG014');
+      expect(f.file, endsWith('app_en.arb'));
+      expect(f.line, 3);
+      expect(f.data['reason'], 'duplicate_key');
+    });
+
+    test('repeated names inside nested objects are not duplicates', () async {
+      final dir = tempProject({
+        'app_en.arb':
+            '{"a": "{n}", "@a": {"placeholders": {"n": {"type": "String"}}},'
+            ' "b": "{n}", "@b": {"placeholders": {"n": {"type": "String"}}}}',
+        'app_es.arb': '{"a": "{n}", "b": "{n}"}',
+      });
+      addTearDown(() => dir.deleteSync(recursive: true));
+      final result = await checkProject(CheckOptions(arbDir: dir.path));
+      expect(
+        result.findings.where((f) => f.data['reason'] == 'duplicate_key'),
+        isEmpty,
+      );
+    });
+
     test('translation that is not UTF-8 is AG014 invalid_encoding', () async {
       final dir = tempProject({'app_en.arb': '{"a": "A"}'});
       addTearDown(() => dir.deleteSync(recursive: true));
