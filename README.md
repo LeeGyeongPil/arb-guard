@@ -108,7 +108,7 @@ In your own project, `arb_guard check` with no options reads `l10n.yaml` (if pre
 | `--no-color` | Plain text output | |
 | `--lang en\|ko` | Language of the output | `--lang ko` |
 | `rules` | Lists all rules and their default severity | `arb_guard rules` |
-| `--version` | Prints the version | `arb_guard 0.1.4` |
+| `--version` | Prints the version | `arb_guard 0.2.0` |
 
 Exit codes: `0` nothing at or above `--fail-on`, `1` findings, `2` usage error (for example a missing folder).
 
@@ -134,7 +134,7 @@ Exit codes: `0` nothing at or above `--fail-on`, `1` findings, `2` usage error (
 | AG011 | error | ICU message syntax error |
 | AG012 | error | Placeholder metadata (type, format) differs from the template |
 | AG013 | info | The translation is identical to the template text |
-| AG014 | error | The ARB file is invalid (JSON, value type, unknown key; also unreadable or non-UTF-8 files) |
+| AG014 | error | The ARB file is invalid (JSON, value type, unknown or duplicate key; also unreadable or non-UTF-8 files) |
 
 If the template has N placeholders missing and the translation has N unknown ones, arb-guard pairs them in document order and reports one `AG003` "renamed" line instead of separate `AG001`/`AG002` lines. If the counts differ it falls back to `AG001`/`AG002`.
 
@@ -257,6 +257,7 @@ flowchart LR
 | Output is Korean on your machine | `LANG` or `ARB_GUARD_LANG` is set to Korean | Add `--lang en` |
 | A file is reported under the wrong locale | The locale comes from `@@locale`, otherwise from the file name | Set `@@locale` or name files `app_<locale>.arb` |
 | A file is reported as `AG014` with `invalid_encoding` | The file is not valid UTF-8 (common with files from outside tools) | Re-save it as UTF-8 |
+| A file is reported as `AG014` with `duplicate_key` | The same key is written twice in one file; JSON keeps only the last value, so the earlier text is lost (common when an LLM or translation service repeats a key) | Keep one entry for the key; the finding shows where the first one is |
 | Exit code 0 although there are warnings | The default is `--fail-on error` | Use `--fail-on warning` |
 
 ## Development
